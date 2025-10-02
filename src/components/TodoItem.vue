@@ -1,0 +1,126 @@
+<template>
+    <div
+        class='relative my-4 w-full md:w-3/4 mx-auto rounded-xl border bg-white transition-all duration-200 overflow-hidden'
+    >
+        <div class="p-5 flex justify-between">
+            <div class="flex items-start justify-between gap-4">
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2">
+                        <h3 class="text-lg md:text-xl font-bold text-gray-900 truncate">
+                            {{ item.title }}
+                        </h3>
+                        <p
+                            class="px-2 py-0.5 rounded-full border text-[1000px] md:text-xs font-semibold bg-blue-50 border-blue-200 text-blue-700"
+                        >
+                            {{ item.sprint_name }}
+                        </p>
+                    </div>
+
+                    <!-- کاربر و تگ‌ها -->
+                    <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+                        <span class="text-lg inline-flex items-center gap-2 text-gray-600">
+                            <UserIcon class="size-5" />
+                            <span class="font-medium text-gray-700">{{ item.user_name }}</span>
+                        </span>
+
+                        <!-- امتیاز -->
+                        <span class="text-gray-600 text-lg">
+                            امتیاز: <span class="font-medium text-gray-700">{{ item.points || 0 }}</span>
+                        </span>
+
+                        <!-- تگ‌ها -->
+                        <div v-if="item.tags && item.tags.length" class="flex items-center gap-1 flex-wrap">
+                            <span class="text-gray-400">تگ‌ها:</span>
+                            <span
+                                v-for="(tag, index) in item.tags"
+                                :key="index"
+                                class="px-1.5 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200 text-[11px]"
+                            >
+                                #{{ tag }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- دکمه‌ها -->
+            <div class="mt-3 flex items-center justify-end gap-2">
+                <button
+                    v-if="item.is_done"
+                    type="button"
+                    @click="toggleDone"
+                    class="cursor-pointer h-9 px-3 inline-flex items-center gap-1 rounded-lg border text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 bg-emerald-500 border-emerald-500 text-white hover:bg-emerald-600 focus-visible:ring-emerald-400"
+                >
+                    انجام‌شده
+                    <CheckBadgeIcon class="w-5 h-5 text-white" />
+                </button>
+
+                <button
+                    v-else
+                    type="button"
+                    @click="toggleDone"
+                    class="h-9 px-3 cursor-pointer inline-flex items-center gap-1 rounded-lg border text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 bg-white border-gray-300 text-gray-800 hover:bg-gray-50 focus-visible:ring-gray-300"
+                >
+                    انجام‌نشده
+                    <HandThumbDownIcon class="w-5 h-5" />
+                </button>
+
+                <RouterLink
+                    :to="`/edit_task/${item.id}`"
+                    class="h-9 px-3 cursor-pointer inline-flex items-center gap-1 rounded-lg border text-sm transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 bg-white text-black border-black hover:bg-black hover:text-white hover:border-transparent"
+                >
+                    ویرایش
+                    <PencilSquareIcon class="w-5 h-5" />
+                </RouterLink>
+
+                <button
+                    @click="deleteTask"
+                    type="button"
+                    class="h-9 px-3 cursor-pointer inline-flex items-center gap-1 rounded-lg border text-sm bg-red-600 text-white border-red-600 hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-400"
+                >
+                    حذف
+                    <TrashIcon class="w-5 h-5" />
+                </button>
+
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { CheckBadgeIcon, HandThumbDownIcon, TrashIcon, PencilSquareIcon, UserIcon } from '@heroicons/vue/24/solid'
+import { useRouter, RouterLink } from 'vue-router'
+import axios from 'axios'
+
+const props = defineProps({
+    item: { type: Object, required: true }
+})
+
+const emit = defineEmits(['task-deleted'])
+
+const router = useRouter()
+
+// تابع تغییر وضعیت انجام‌شده/انجام‌نشده
+const toggleDone = async () => {
+    try {
+        props.item.is_done = !props.item.is_done
+        await axios.put(`http://localhost:3000/tasks/${props.item.id}`, props.item)
+    } catch (error) {
+        console.error('خطا در به‌روزرسانی وضعیت تسک:', error)
+        throw new Error(error)
+    }
+}
+
+// تابع حذف
+const deleteTask = async () => {
+    if (confirm('آیا مطمئن هستید که می‌خواهید این تسک را حذف کنید؟')) {
+        try {
+            await axios.delete(`http://localhost:3000/tasks/${props.item.id}`)
+            emit('task-deleted', props.item.id)
+        } catch (error) {
+            console.error('خطا در حذف تسک:', error)
+            throw new Error(error)
+        }
+    }
+}
+</script>

@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@font-face {
+    font-family: vazir;
+    src: url("./assets/fonts/Vazir.ttf");
+}
+*{
+    font-family: "vazir";
+    direction: rtl;
+}
