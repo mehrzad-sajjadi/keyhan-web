@@ -25,7 +25,7 @@
 
                         <!-- امتیاز -->
                         <span class="text-gray-600 text-lg">
-                            امتیاز: <span class="font-medium text-gray-700">{{ item.points || 0 }}</span>
+                            امتیاز: <span class="font-medium text-gray-700">{{ item.points }}</span>
                         </span>
 
                         <!-- تگ‌ها -->

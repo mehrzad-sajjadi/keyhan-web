@@ -94,7 +94,7 @@
                                 <!-- points -->
                                 <div class="flex-1">
                                     <label class="block mb-2 text-lg font-medium text-gray-900">
-                                        امتیاز تسک (Story Points)
+                                        امتیاز تسک 
                                     </label>
                                     <input
                                         v-model.number="points"
