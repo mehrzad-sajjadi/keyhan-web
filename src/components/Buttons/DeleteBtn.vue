@@ -2,7 +2,7 @@
     <button
         @click="handleClick"
         type="button"
-        class="btn-base btn-delete"    
+        class="btn-delete"    
     >
         <slot></slot>
     </button>

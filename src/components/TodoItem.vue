@@ -65,14 +65,10 @@
                     <HandThumbDownIcon class="w-5 h-5" />
                 </button>
 
-                <div class="btn-edit">تست ویرایش</div>  <!-- ببین این استایل می‌گیره یا نه -->
-                <RouterLink
-                    :to="`/edit_task/${item.id}`"
-                    class="btn-edit"
-                >
+                <EditBtn :to="`/edit_task/${item.id}`">
                     ویرایش
                     <PencilSquareIcon class="w-5 h-5" />
-                </RouterLink>
+                </EditBtn>
 
                 <DeleteBtn
                     @click="deleteTask"
@@ -91,6 +87,8 @@ import { useRouter, RouterLink } from 'vue-router'
 import axios from 'axios'
 //components
 import DeleteBtn from '@/components/Buttons/DeleteBtn.vue'
+import EditBtn from '@/components/Buttons/EditBtn.vue'
+
 
 const props = defineProps({
     item: { type: Object, required: true }
