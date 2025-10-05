@@ -1,9 +1,31 @@
 @import "tailwindcss";
+
 @font-face {
-    font-family: vazir;
-    src: url("./assets/fonts/Vazir.ttf");
+  font-family: vazir;
+  src: url("./assets/fonts/Vazir.ttf");
 }
-*{
-    font-family: "vazir";
-    direction: rtl;
+
+* {
+  font-family: "vazir";
+  direction: rtl;
+}
+
+@utility btn-base {
+  @apply h-9 px-3 cursor-pointer inline-flex items-center gap-1 rounded-lg border text-sm transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+}
+
+@utility btn-delete {
+  @apply btn-base bg-red-600 text-white border-red-600 hover:bg-red-700 hover:border-transparent focus-visible:ring-red-400;
+}
+
+@utility btn-edit {
+  @apply btn-base bg-white text-black border-black hover:bg-black hover:text-white hover:border-transparent focus-visible:ring-black;
+}
+
+@utility btn-add {
+  @apply btn-base px-4 text-lg bg-[#00bc7d] text-white border-[#00bc7d] hover:bg-[#00a66c] hover:border-transparent focus:shadow-md focus-visible:ring-[#00bc7d];
+}
+
+@utility btn-cancel {
+  @apply btn-base px-4 text-lg bg-white text-red-500 border-red-500 hover:bg-red-600 hover:text-white hover:border-transparent focus:shadow-md focus-visible:ring-red-500;
 }

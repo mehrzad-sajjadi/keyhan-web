@@ -1,29 +1,14 @@
 {
   "tasks": [
     {
-      "id": 424,
-      "title": "توسعه بک اند پنل کاربری 45",
-      "sprint_name": "تست جدید",
-      "user_name": "رضا محمدی",
-      "tags": ["بک اند"],
-      "is_done": false,
-      "points": 4
-    },
-    {
-      "id": 425,
-      "title": "طراحی رابط کاربری داشبورد",
-      "sprint_name": "فرانت اند",
-      "user_name": "فاطمه حسینی",
-      "tags": ["UI", "فرانت اند"],
-      "is_done": false,
-      "points": 5
-    },
-    {
       "id": 426,
       "title": "بهینه‌سازی پایگاه داده",
       "sprint_name": "Sprint",
       "user_name": "رضا محمدی",
-      "tags": ["دیتابیس", "بک اند"],
+      "tags": [
+        "دیتابیس",
+        "بک اند"
+      ],
       "is_done": true,
       "points": 3
     },
@@ -32,7 +17,10 @@
       "title": "جمع‌آوری نیازمندی‌های مشتری",
       "sprint_name": "Sprint",
       "user_name": "زهرا محمدنژاد",
-      "tags": ["تحلیل", "مشتری"],
+      "tags": [
+        "تحلیل",
+        "مشتری"
+      ],
       "is_done": false,
       "points": 2
     },
@@ -41,7 +29,10 @@
       "title": "پیاده‌سازی الگوریتم هوش مصنوعی",
       "sprint_name": "تست جدید",
       "user_name": "سهراب",
-      "tags": ["AI", "بک اند"],
+      "tags": [
+        "AI",
+        "بک اند"
+      ],
       "is_done": false,
       "points": 8
     },
@@ -50,7 +41,10 @@
       "title": "تست واحد برای ماژول پرداخت",
       "sprint_name": "فرانت اند",
       "user_name": "فاطمه حسینی",
-      "tags": ["تست", "QA"],
+      "tags": [
+        "تست",
+        "QA"
+      ],
       "is_done": true,
       "points": 4
     },
@@ -59,7 +53,9 @@
       "title": "مستندسازی سیستم",
       "sprint_name": "Sprint",
       "user_name": "زهرا محمدنژاد",
-      "tags": ["مستندات"],
+      "tags": [
+        "مستندات"
+      ],
       "is_done": false,
       "points": 1
     }

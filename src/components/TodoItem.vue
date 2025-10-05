@@ -65,23 +65,21 @@
                     <HandThumbDownIcon class="w-5 h-5" />
                 </button>
 
+                <div class="btn-edit">تست ویرایش</div>  <!-- ببین این استایل می‌گیره یا نه -->
                 <RouterLink
                     :to="`/edit_task/${item.id}`"
-                    class="h-9 px-3 cursor-pointer inline-flex items-center gap-1 rounded-lg border text-sm transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 bg-white text-black border-black hover:bg-black hover:text-white hover:border-transparent"
+                    class="btn-edit"
                 >
                     ویرایش
                     <PencilSquareIcon class="w-5 h-5" />
                 </RouterLink>
 
-                <button
+                <DeleteBtn
                     @click="deleteTask"
-                    type="button"
-                    class="h-9 px-3 cursor-pointer inline-flex items-center gap-1 rounded-lg border text-sm bg-red-600 text-white border-red-600 hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-400"
                 >
                     حذف
                     <TrashIcon class="w-5 h-5" />
-                </button>
-
+                </DeleteBtn>
             </div>
         </div>
     </div>
@@ -91,6 +89,8 @@
 import { CheckBadgeIcon, HandThumbDownIcon, TrashIcon, PencilSquareIcon, UserIcon } from '@heroicons/vue/24/solid'
 import { useRouter, RouterLink } from 'vue-router'
 import axios from 'axios'
+//components
+import DeleteBtn from '@/components/Buttons/DeleteBtn.vue'
 
 const props = defineProps({
     item: { type: Object, required: true }
