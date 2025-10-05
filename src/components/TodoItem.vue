@@ -70,9 +70,7 @@
                     <PencilSquareIcon class="w-5 h-5" />
                 </EditBtn>
 
-                <DeleteBtn
-                    @click="deleteTask"
-                >
+                <DeleteBtn @click="deleteTask">
                     حذف
                     <TrashIcon class="w-5 h-5" />
                 </DeleteBtn>

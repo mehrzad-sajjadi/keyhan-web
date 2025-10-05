@@ -49,19 +49,14 @@
                         </div>
                     </div>
                     <div class="flex flex-row justify-between mb-4 px-6">
-                        <button
+                        <SubmitBtn
                             type="submit"
-                            class="h-9 px-4 text-lg cursor-pointer duration-150 rounded focus:shadow-outline bg-[#00bc7d] hover:bg-[#00a66c] text-white border border-[#00bc7d] hover:border-transparent"
                         >
                             افزودن
-                        </button>
-                        <button
-                            @click="router.push('/sprints')"
-                            type="button"
-                            class="h-9 px-4 text-lg cursor-pointer duration-150 rounded focus:shadow-outline bg-white text-red-500 border border-red-500 hover:bg-red-600 hover:text-white hover:border-transparent"
-                        >
+                        </SubmitBtn>
+                        <CancelBtn to="/sprints">
                             انصراف
-                        </button>
+                        </CancelBtn>
                     </div>
             </div>
         </form>
@@ -76,6 +71,9 @@ import { useRouter } from "vue-router";
 
 //Components
 import Header from "@/components/Header.vue";
+import SubmitBtn from '@/components/Buttons/SubmitBtn.vue'
+import CancelBtn from '@/components/Buttons/CancelBtn.vue'
+
 
 import { ref } from "vue";
 

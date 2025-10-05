@@ -28,9 +28,9 @@
                     <td
                         class="px-4 py-3 border-t border-[#00b477]/10 text-gray-700 text-md"
                     >
-                        <button @click="sendDataToParent(data.id)" class="flex bg-red-600 m-auto text-white rounded-md py-1 px-2 hover:bg-red-700 cursor-pointer">
+                        <DeleteBtn @click="sendDataToParent(data.id)" >
                             <slot name="deleteBtn"></slot>
-                        </button>
+                        </DeleteBtn>
                     </td>
                 </tr>
             </tbody>
@@ -39,6 +39,10 @@
 </template>
 
 <script setup>
+//components
+import DeleteBtn from '@/components/Buttons/DeleteBtn.vue';
+
+
 const emit = defineEmits(["dataId"]);
 
 function sendDataToParent(idParam){

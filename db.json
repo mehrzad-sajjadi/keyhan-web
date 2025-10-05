@@ -58,6 +58,24 @@
       ],
       "is_done": false,
       "points": 1
+    },
+    {
+      "id": 989,
+      "title": "بررسی کارکرد کامپوننت دکمه افزودن",
+      "sprint_name": "فرانت اند",
+      "user_name": "فاطمه حسینی",
+      "tags": [],
+      "is_done": false,
+      "points": 10
+    },
+    {
+      "id": 925,
+      "title": "تست دوم کامپوننت دکمه",
+      "sprint_name": "فرانت اند",
+      "user_name": "رضا محمدی",
+      "tags": [],
+      "is_done": false,
+      "points": 20
     }
   ],
   "users": [
@@ -100,12 +118,6 @@
     {
       "id": 2,
       "name": "فرانت اند",
-      "start_date": "1404/07/09",
-      "end_date": "1404/07/23"
-    },
-    {
-      "id": 977,
-      "name": "تست جدید",
       "start_date": "1404/07/09",
       "end_date": "1404/07/23"
     }

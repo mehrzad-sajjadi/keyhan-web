@@ -108,19 +108,12 @@
                     </div>
                     <!-- دکمه -->
                     <div class="flex flex-row justify-between mb-4 px-6">
-                        <button
-                            type="submit"
-                            class="h-9 px-4 text-lg cursor-pointer duration-150 rounded focus:shadow-outline bg-[#00bc7d] hover:bg-[#00a66c] text-white border border-[#00bc7d] hover:border-transparent"
-                        >
+                        <SubmitBtn>
                             ویرایش تسک
-                        </button>
-                        <button
-                            type="button"
-                            class="h-9 px-4 text-lg cursor-pointer duration-150 rounded focus:shadow-outline bg-white text-red-500 border border-red-500 hover:bg-red-600 hover:text-white hover:border-transparent"
-                            @click="router.push('/')"
-                        >
+                        </SubmitBtn>
+                        <CancelBtn to="/">
                             انصراف
-                        </button>
+                        </CancelBtn>
                     </div>
                 </div>
             </div>
@@ -131,6 +124,9 @@
 <script setup>
 //components
 import Header from "@/components/Header.vue";
+import SubmitBtn from '@/components/Buttons/SubmitBtn.vue'
+import CancelBtn from '@/components/Buttons/CancelBtn.vue'
+
 //packages
 import axios from "axios";
 import { useRouter, useRoute } from "vue-router";
