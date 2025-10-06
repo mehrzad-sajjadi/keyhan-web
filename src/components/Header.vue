@@ -21,18 +21,9 @@
                     <NavLink to="/">
                         لیست تسکها
                     </NavLink>
-
-                    
-                    <NavLink to="/add_task" >
-                        افزودن تسک 
-                    </NavLink>
                     
                     <NavLink to="/sprints" >
                         اسپرینت ها
-                    </NavLink>
-
-                    <NavLink to="/add_sprint" >
-                        افزودن اسپرینت 
                     </NavLink>
 
                     <NavLink to="/users" >

@@ -1,11 +1,10 @@
 <template>
     <Header></Header>
-    <div class="flex justify-end ">
-        <button @click="target=true" class="my-5 flex flex-wrap content-center mx-10 bg-[#00b477] rounded-md cursor-pointer hover:bg-[#366b59] text-white px-3 py-1">
-            <UserPlusIcon class="size-5 mx-1" />
-            افزودن کاربر 
-        </button>
-    </div>
+    <LinkBtn to="add_user">
+        <UserPlusIcon class="size-5 mx-1" />
+        افزودن کاربر 
+    </LinkBtn>
+
     <div class="w-full flex justify-center py-10">
         <Table
             :header="headerTable"
@@ -24,103 +23,16 @@
                 </DeleteBtn>
             </template>
         </Table>
-        </div>
-    <teleport to="body">
-        <Modal
-            v-if="target"
-            @closeModal="
-                () => {
-                    target = false;
-                }
-            "
-        >
-            <template #header_title>
-                افزودن کاربر جدید
-            </template>
-            <template #content>
-                <div
-                    class="flex flex-col w-full h-full"
-                >
-                    <form @submit.prevent="addUser" class="text-[#014329] h-full flex flex-col justify-between">                            
-                        <!-- اطلاعات کاربر -->
-                        <div>
-                            <div class="grid grid-cols-2 gap-3 my-5">
-                                <div class="w-full">
-                                    <label>نام کاربر</label>
-                                    <input 
-                                        v-model="newUser.name"
-                                        required
-                                        placeholder="نام کاربری را وارد کنید"
-                                        type="text" 
-                                        class="rounded-md py-2 px-1 border border-[#7E848E] mt-2 w-full"
-                                    >
-                                </div>
-                                <div class="w-full">
-                                    <label>سن</label>
-                                    <input 
-                                        v-model="newUser.age"
-                                        required
-                                        placeholder="سن کاربر جدید را وارد کنید"
-                                        type="text" 
-                                        class="rounded-md py-2 px-1 border border-[#7E848E] mt-2 w-full"
-                                    >
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-3 my-5">
-                                <div class="w-full">
-                                    <label>کشور</label>
-                                    <input 
-                                        v-model="newUser.country"
-                                        required
-                                        placeholder="نام کشور را وارد کنید"
-                                        type="text" 
-                                        class="rounded-md py-2 px-1 border border-[#7E848E] mt-2 w-full"
-                                    >
-                                </div>
-                                <div class="w-full">
-                                    <label>شغل</label>
-                                    <input 
-                                        v-model="newUser.job"
-                                        required
-                                        placeholder="شغل کاربر جدید را وارد کنید"
-                                        type="text" 
-                                        class="rounded-md py-2 px-1 border border-[#7E848E] mt-2 w-full"
-                                    >
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- دکمه ها -->
-                        <div class="grid grid-cols-2 gap-3 mt-12">
-                            <button 
-                                @click="target=false"
-                                type="button"
-                                class="rounded-xl border text-[#007a49] border-[#007a49] text-xl py-1 cursor-pointer "
-                            >
-                                لغو
-                            </button>
-                            <button
-                                type="submit"
-                                class="bg-[#007a49] text-white rounded-xl py-1 cursor-pointer "
-                            >
-                                تایید
-                            </button>
-                        </div>
-                        
-                    </form>
-                </div>
-            </template>
-        </Modal>
-    </teleport>
+    </div>
 </template>
 
 <script setup>
 //components
 import Header from "@/components/Header.vue" ;
 import Table from "@/components/Table.vue" ;
-import Modal from "@/components/Modal.vue";
 import DeleteBtn from "@/components/Buttons/DeleteBtn.vue";
 import EditBtn from "@/components/Buttons/EditBtn.vue";
+import LinkBtn from "@/components/Buttons/LinkBtn.vue";
 
 //package
 import { UserPlusIcon, UserMinusIcon, PencilSquareIcon } from "@heroicons/vue/24/solid";
@@ -131,40 +43,20 @@ import { ref, onBeforeMount } from "vue" ;
 const users = ref([]);
 const headerTable = ["ID", "نام کاربر", "سن", "کشور", "شغل"];
 const keysTable = ["id", "name", "age", "country", "job"];
-const target = ref(false);
-let idValue = Math.floor(Math.random() * 1000);
-const id = ref(idValue);
 
-const newUser = ref({
-    id: id.value,
-    name: "",
-    age: "",
-    country: "",
-    job: ""
-});
 
 async function removeUser(id) {
     if (confirm("آیا از حذف کاربر مطمئن هستید؟")) {
         try {
             await axios.delete(`http://localhost:3000/users/${id}`);
             users.value = users.value.filter(user => user.id !== id);
-            console.log(`کاربر با شناسه ${id} حذف شد`);
+            new Flash('کاربر مورد نظر حذف شد ', 'warning');
         } catch (error) {
             throw new Error(error);
         }
     }
 }
 
-async function addUser() {
-    console.log(JSON.stringify(newUser.value));
-    try {
-        await axios.post("http://localhost:3000/users", newUser.value);
-        target.value = false;
-        await getUsers();  // لیست کاربران را پس از افزودن بروزرسانی کنید
-    } catch (error) {
-        throw new Error("Error");
-    }
-}
 
 async function getUsers() {
     try {

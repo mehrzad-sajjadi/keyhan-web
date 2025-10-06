@@ -97,8 +97,10 @@ const router = useRouter()
 // تابع تغییر وضعیت انجام‌شده/انجام‌نشده
 const toggleDone = async () => {
     try {
-        props.item.is_done = !props.item.is_done
-        await axios.put(`http://localhost:3000/tasks/${props.item.id}`, props.item)
+        props.item.is_done = !props.item.is_done;
+        await axios.put(`http://localhost:3000/tasks/${props.item.id}`, props.item);
+        new Flash('وضعیت تسک تغییر کرد', 'info');
+
     } catch (error) {
         console.error('خطا در به‌روزرسانی وضعیت تسک:', error)
         throw new Error(error)

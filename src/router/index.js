@@ -5,6 +5,8 @@ import LoginView from "@/views/LoginView.vue";
 import AddSprintView from "@/views/AddSprintView.vue";
 import EditSprintView from "@/views/EditSprintView.vue";
 import EditTaskView from "@/views/EditTaskView.vue";
+import AddUserView from "@/views/AddUserView.vue";
+
 
 import UserView from "@/views/UserView.vue";
 import SprintView from "@/views/SprintView.vue";
@@ -33,6 +35,10 @@ const routes=[
     {
         path:"/add_sprint",
         component : AddSprintView
+    },
+    {
+        path:"/add_user",
+        component : AddUserView
     },
     {
         path:"/users",

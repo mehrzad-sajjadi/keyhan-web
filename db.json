@@ -21,7 +21,7 @@
         "تحلیل",
         "مشتری"
       ],
-      "is_done": true
+      "is_done": false
     },
     {
       "id": 429,
@@ -32,7 +32,7 @@
         "تست",
         "QA"
       ],
-      "is_done": true,
+      "is_done": false,
       "points": 4
     },
     {

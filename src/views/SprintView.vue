@@ -1,5 +1,9 @@
 <template>
     <Header></Header>
+    <LinkBtn to="add_sprint">
+        <InboxStackIcon  class="size-5 mx-1" />
+        افزودن اسپرینت
+    </LinkBtn>
     <div class="w-full flex justify-center py-10">
         <Table
             :header="headerTable"
@@ -27,10 +31,11 @@ import Table from "@/components/Table.vue";
 import Header from "@/components/Header.vue";
 import DeleteBtn from "@/components/Buttons/DeleteBtn.vue";
 import EditBtn from "@/components/Buttons/EditBtn.vue";
+import LinkBtn from "@/components/Buttons/LinkBtn.vue";
 
 //packages
 import axios from "axios";
-import { TrashIcon, PencilSquareIcon } from '@heroicons/vue/24/solid'
+import { TrashIcon, PencilSquareIcon, InboxStackIcon } from '@heroicons/vue/24/solid'
 
 import { ref, onBeforeMount } from "vue";
 

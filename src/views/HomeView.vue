@@ -1,15 +1,21 @@
 <template>
     <Header />
+    <LinkBtn to="/add_task">
+        <DocumentPlusIcon class="size-5 mx-1" />
+        افزودن تسک 
+    </LinkBtn>
+
     <TodoItem v-for="(task,index) in tasksItem" :item="task" :key="index" @task-deleted="handleDelete" />
 </template>
 <script setup>
 //components
 import Header from "@/components/Header.vue";
 import TodoItem from "@/components/TodoItem.vue";
+import LinkBtn from "@/components/Buttons/LinkBtn.vue";
+import { DocumentPlusIcon } from "@heroicons/vue/24/solid";
 //package
 import axios from "axios";
 import { ref, onBeforeMount } from "vue";
-import { useToast } from 'vue-toastification';
 
 
 const tasksItem = ref([]);
