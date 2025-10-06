@@ -56,7 +56,7 @@ async function removeSprint(id) {
         try {
             await axios.delete(`http://localhost:3000/sprints/${id}`);
             sprints.value = sprints.value.filter(sprint => sprint.id !== id);
-            console.log(`اسپرینت با شناسه ${id} حذف شد`);
+            new Flash('اسپرینت مورد نظر حذف شد ', 'warning');
         } catch (error) {
             throw new Error(error);
         }

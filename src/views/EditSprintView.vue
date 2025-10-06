@@ -100,10 +100,12 @@ async function editSprint() {
             start_date: form.start_date,
             end_date: form.end_date
         });
+        new Flash('اسپرینت با موفقیت ویرایش شد', 'success');
+        router.push("/sprints");
     } catch (error) {
         throw new Error(error);
     }
-    router.push("/sprints");
+    
 }
 
 // دریافت اطلاعات اسپرینت

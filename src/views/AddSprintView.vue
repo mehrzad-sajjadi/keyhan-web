@@ -115,7 +115,7 @@ async function AddSprint() {
             start_date: form.start_date,
             end_date: form.end_date
         });
-        resetForm();
+        new Flash('اسپرینت با موفقیت ایجاد شد', 'success');
     } catch (error) {
         throw new Error(error);
     }

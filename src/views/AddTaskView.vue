@@ -161,7 +161,7 @@ const form = reactive({
 
 const newTag = ref("");
 
-// اضافه کردن تسک
+// ایجاد کردن تسک
 async function AddTask() {
     isSubmitted.value = true;
     
@@ -179,6 +179,7 @@ async function AddTask() {
             is_done: form.isDone,
             points: form.points
         });
+        new Flash('تسک با موفقیت ایجاد شد', 'success');
         router.push("/");
     } catch (error) {
         throw new Error(error);

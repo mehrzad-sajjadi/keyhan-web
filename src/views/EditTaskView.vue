@@ -19,9 +19,11 @@
                                     v-model="form.title"
                                     type="text"
                                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-[#00bc7d] focus:border-[#00bc7d]"
-                                    required
                                     autofocus
                                 />
+                                <p v-if="isSubmitted && !form.title" class="error-box">
+                                    عنوان تسک الزامی است
+                                </p>
                             </div>
                             <div class="flex flex-wrap gap-3">
                                 <!-- sprint -->
@@ -38,6 +40,9 @@
                                             {{ sprint.name }}
                                         </option>
                                     </select>
+                                    <p v-if="isSubmitted && !form.sprintName" class="error-box">
+                                        نوع اسپرینت الزامی است
+                                    </p>
                                 </div>
                                 <!-- user -->
                                 <div class="flex-1">
@@ -52,6 +57,10 @@
                                         <option v-for="member in teamMembers" :key="member.id" :value="member.name">
                                             {{ member.name }}
                                         </option>
+                                        <p v-if="isSubmitted && !form.userId" class="error-box">
+                                            انتخاب کاربر الزامی است
+                                        </p>
+
                                     </select>
                                 </div>
                                 <!-- tags -->
@@ -159,8 +168,13 @@ const form = reactive({
 
 const newTag = ref("");
 
+const isSubmitted = ref(false);
 // ویرایش تسک
 async function editTask() {
+    isSubmitted.value = true ;
+    if(!form.title || !form.sprintName || !form.userId){
+        return ;
+    }
     try {
         await axios.put(`http://localhost:3000/tasks/${form.id}`, {
             id: form.id,
@@ -171,10 +185,11 @@ async function editTask() {
             is_done: form.isDone,
             points: form.points
         });
+        new Flash('تسک با موفقیت ویرایش شد', 'success');
+        router.push("/");
     } catch (error) {
         throw new Error(error);
     }
-    router.push("/");
 }
 
 //دریافت لیست افراد تیم

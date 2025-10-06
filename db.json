@@ -24,18 +24,6 @@
       "is_done": true
     },
     {
-      "id": 428,
-      "title": "پیاده‌سازی الگوریتم هوش مصنوعی",
-      "sprint_name": "تست جدید",
-      "user_name": "سهراب",
-      "tags": [
-        "AI",
-        "بک اند"
-      ],
-      "is_done": false,
-      "points": 8
-    },
-    {
       "id": 429,
       "title": "تست واحد برای ماژول پرداخت",
       "sprint_name": "فرانت اند",
@@ -48,35 +36,15 @@
       "points": 4
     },
     {
-      "id": 430,
-      "title": "مستندسازی سیستم",
-      "sprint_name": "Sprint",
-      "user_name": "زهرا محمدنژاد",
+      "id": 105,
+      "title": "تست فلش مسیج",
+      "sprint_name": "FlashMessage",
+      "user_name": "رضا محمدی",
       "tags": [
-        "مستندات"
+        "JS"
       ],
-      "is_done": false,
-      "points": 1
-    },
-    {
-      "id": 989,
-      "title": "بررسی کارکرد کامپوننت دکمه افزودن",
-      "sprint_name": "فرانت اند",
-      "user_name": "فاطمه حسینی",
-      "tags": [],
-      "is_done": false,
-      "points": 10
-    },
-    {
-      "id": 102,
-      "title": "بررسی reactive",
-      "sprint_name": "فرانت اند",
-      "user_name": "سهراب",
-      "tags": [
-        "vue"
-      ],
-      "is_done": false,
-      "points": 10
+      "is_done": true,
+      "points": 100
     }
   ],
   "users": [
@@ -123,10 +91,10 @@
       "end_date": "1404/07/30"
     },
     {
-      "id": 933,
-      "name": "هوش مصنوعی",
-      "start_date": "1404/07/29",
-      "end_date": "1404/07/25"
+      "id": 680,
+      "name": "FlashMessage",
+      "start_date": "1404/07/14",
+      "end_date": "1404/07/16"
     }
   ]
 }

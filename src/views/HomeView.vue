@@ -9,6 +9,8 @@ import TodoItem from "@/components/TodoItem.vue";
 //package
 import axios from "axios";
 import { ref, onBeforeMount } from "vue";
+import { useToast } from 'vue-toastification';
+
 
 const tasksItem = ref([]);
 
@@ -25,6 +27,7 @@ async function getTasks(){
 
 const handleDelete = (deletedId) => {
     tasksItem.value = tasksItem.value.filter(task => task.id !== deletedId);
+    new Flash('تسک مورد نظر حذف شد ', 'warning');
 }
 
 onBeforeMount(() => {
