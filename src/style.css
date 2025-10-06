@@ -49,3 +49,7 @@
 @utility btn-link {
   @apply my-5 flex flex-wrap content-center mx-10 bg-[#00b477] rounded-md cursor-pointer hover:bg-[#366b59] text-white px-3 py-1
 }
+
+@utility icon {
+  @apply w-5 h-5 
+}

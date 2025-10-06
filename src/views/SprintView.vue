@@ -1,7 +1,7 @@
 <template>
     <Header></Header>
     <LinkBtn to="add_sprint">
-        <InboxStackIcon  class="size-5 mx-1" />
+        <InboxStackIcon  class="icon" />
         افزودن اسپرینت
     </LinkBtn>
     <div class="w-full flex justify-center py-10">
@@ -13,11 +13,11 @@
             <template #operationBtn="{ data }">
                 <EditBtn :to="`/edit_sprint/${data.id}`">
                     ویرایش
-                    <PencilSquareIcon class="w-5 h-5" />
+                    <PencilSquareIcon class="icon" />
                 </EditBtn>
 
                 <DeleteBtn @click="removeSprint(data.id)" >
-                    <TrashIcon class="size-5 " />
+                    <TrashIcon class="icon" />
                     حذف
                 </DeleteBtn>
             </template>

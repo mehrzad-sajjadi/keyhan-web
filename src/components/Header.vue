@@ -46,7 +46,7 @@
                         to="/login"
                         class="hidden md:flex items-center space-x-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-full transition group cursor-pointer"
                     >
-                        <ArrowLeftEndOnRectangleIcon class="size-5 " />
+                        <ArrowLeftEndOnRectangleIcon class="icon" />
                     </RouterLink>
                 </div>
             </div>

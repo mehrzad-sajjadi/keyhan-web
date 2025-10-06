@@ -1,7 +1,7 @@
 <template>
     <Header />
     <LinkBtn to="/add_task">
-        <DocumentPlusIcon class="size-5 mx-1" />
+        <DocumentPlusIcon class="icon" />
         افزودن تسک 
     </LinkBtn>
 

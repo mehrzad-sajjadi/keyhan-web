@@ -50,7 +50,7 @@
                     @click="toggleDone"
                 >
                     انجام‌شده
-                    <CheckBadgeIcon class="w-5 h-5 text-white" />
+                    <CheckBadgeIcon class="icon text-white" />
                 </DoneBtn>
 
                 <NotDoneBtn
@@ -58,17 +58,17 @@
                     @click="toggleDone"
                 >
                     انجام‌نشده
-                    <HandThumbDownIcon class="w-5 h-5" />
+                    <HandThumbDownIcon class="icon" />
                 </NotDoneBtn>
 
                 <EditBtn :to="`/edit_task/${item.id}`">
                     ویرایش
-                    <PencilSquareIcon class="w-5 h-5" />
+                    <PencilSquareIcon class="icon" />
                 </EditBtn>
 
                 <DeleteBtn @click="deleteTask">
                     حذف
-                    <TrashIcon class="w-5 h-5" />
+                    <TrashIcon class="icon" />
                 </DeleteBtn>
             </div>
         </div>
