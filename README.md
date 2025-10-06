@@ -28,16 +28,18 @@
 
 ۳. 
 ```
-1-npm i 
+npm i 
 ```
-2-npm run dev
+
+```
+npm run dev
 ```
 با اجرای این دستور ادرس http://localhost:5173/ دریافت میکنید
 ```
 3-npx json-server db.json
 ```
 با اجرای این دستور سرور محلی شما با ادرسهای زیر به شما داده میشود
-```
+
 http://localhost:3000/tasks
 http://localhost:3000/users
 http://localhost:3000/sprints
