@@ -30,13 +30,16 @@
 1-npm i 
 
 2-npm run dev
+```
 با اجرای این دستور ادرس http://localhost:5173/ دریافت میکنید
-
+```
 3-npx json-server db.json
+```
 با اجرای این دستور سرور محلی شما با ادرسهای زیر به شما داده میشود
-  http://localhost:3000/tasks
-  http://localhost:3000/users
-  http://localhost:3000/sprints
+```
+http://localhost:3000/tasks
+http://localhost:3000/users
+http://localhost:3000/sprints
 
 ## ساختار پروژه
 در اینجا یک نمای کلی سطح بالا از ساختار دایرکتوری آورده شده است:
