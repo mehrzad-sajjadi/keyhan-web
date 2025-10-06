@@ -1,13 +1,13 @@
 <template>
     <Header />
     <div class="min-h-screen px-4 sm:px-6 lg:px-8 ">
-        <form @submit.prevent="AddUser()" >
+        <form @submit.prevent="editUser()" >
             <div class="w-5/6 mx-auto py-5 my-16 border border-gray-500 rounded-lg ">
                 <div class="flex flex-col justify-between">
                     <!-- inputs -->
                     <div class="mb-5 px-6">
                         <h2 class="font-semibold text-xl text-gray-800 mb-6">
-                            افزودن کاربر جدید
+                            ویرایش کاربر
                         </h2>
                         <div class="space-y-5">
                             <!-- row 1: name and age -->
@@ -78,7 +78,7 @@
                     <!-- دکمه -->
                     <div class="flex flex-row justify-start gap-5 mb-4 px-6">
                         <SubmitBtn>
-                            افزودن کاربر
+                            ویرایش کاربر
                         </SubmitBtn>
                         <CancelBtn to="/users" >
                             انصراف
@@ -89,6 +89,7 @@
         </form>
     </div>
 </template>
+
 <script setup>
 //components
 import Header from "@/components/Header.vue";
@@ -97,41 +98,62 @@ import CancelBtn from '@/components/Buttons/CancelBtn.vue';
 
 //packages
 import axios from "axios";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 import { ref, reactive, onBeforeMount } from "vue";
 
 const router = useRouter();
-
+const route = useRoute();
 
 const isSubmitted = ref(false);
 
 const form = reactive({
-    id: Math.floor(Math.random() * 1000), 
+    id: "",
     name: "",
     age: "",
     country: "",
     job: ""
 });
 
-async function AddUser(){
-    isSubmitted.value = true ;
-    if(!form.name || !form.job || !form.age || !form.country){
-        return ;
+
+onBeforeMount(() => {
+    form.id = route.params.id;
+    getUser();
+});
+
+// دریافت اطلاعات کاربر
+async function getUser() {
+    try {
+        const response = await axios.get(`http://localhost:3000/users/${form.id}`);
+        const user = response.data;
+        form.name = user.name;
+        form.age = user.age;
+        form.country = user.country;
+        form.job = user.job; 
+    } catch (error) {
+        console.error('Error fetching user:', error);
+
+    }
+}
+
+// ویرایش کاربر
+async function editUser() { // نام تابع را به editUser تغییر دادم برای consistency
+    isSubmitted.value = true;
+    if (!form.name || !form.age || !form.country || !form.job) {
+        return;
     }
     try {
-        axios.post("http://localhost:3000/users",{
+        await axios.put(`http://localhost:3000/users/${form.id}`, {
             id: form.id,
             name: form.name,
             age: form.age,
             country: form.country,
-            tags: form.tags,
-            job: form.job,
+            job: form.job
         });
-        isSubmitted.value = false ;
+        new Flash('کاربر با موفقیت ویرایش شد', 'success'); 
         router.push("/users");
     } catch (error) {
-        throw new Error(error)
+        throw new Error(error);
     }
 }
 

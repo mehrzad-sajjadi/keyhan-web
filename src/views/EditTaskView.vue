@@ -19,7 +19,6 @@
                                     v-model="form.title"
                                     type="text"
                                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-[#00bc7d] focus:border-[#00bc7d]"
-                                    autofocus
                                 />
                                 <p v-if="isSubmitted && !form.title" class="error-box">
                                     عنوان تسک الزامی است
