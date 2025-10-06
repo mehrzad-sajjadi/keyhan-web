@@ -45,25 +45,21 @@
 
             <!-- دکمه‌ها -->
             <div class="mt-3 flex items-center justify-end gap-2">
-                <button
+                <DoneBtn
                     v-if="item.is_done"
-                    type="button"
                     @click="toggleDone"
-                    class="cursor-pointer h-9 px-3 inline-flex items-center gap-1 rounded-lg border text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 bg-emerald-500 border-emerald-500 text-white hover:bg-emerald-600 focus-visible:ring-emerald-400"
                 >
                     انجام‌شده
                     <CheckBadgeIcon class="w-5 h-5 text-white" />
-                </button>
+                </DoneBtn>
 
-                <button
+                <NotDoneBtn
                     v-else
-                    type="button"
                     @click="toggleDone"
-                    class="h-9 px-3 cursor-pointer inline-flex items-center gap-1 rounded-lg border text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 bg-white border-gray-300 text-gray-800 hover:bg-gray-50 focus-visible:ring-gray-300"
                 >
                     انجام‌نشده
                     <HandThumbDownIcon class="w-5 h-5" />
-                </button>
+                </NotDoneBtn>
 
                 <EditBtn :to="`/edit_task/${item.id}`">
                     ویرایش
@@ -86,6 +82,8 @@ import axios from 'axios'
 //components
 import DeleteBtn from '@/components/Buttons/DeleteBtn.vue'
 import EditBtn from '@/components/Buttons/EditBtn.vue'
+import NotDoneBtn from '@/components/Buttons/NotDoneBtn.vue'
+import DoneBtn from './Buttons/DoneBtn.vue'
 
 
 const props = defineProps({

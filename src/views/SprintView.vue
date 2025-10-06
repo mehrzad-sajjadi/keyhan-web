@@ -6,10 +6,19 @@
             :datas="sprints"
             @dataId="removeSprint"
         >
-            <template #deleteBtn>
-                <TrashIcon class="size-5 " />
-                حذف
+            <template #operationBtn>
+                <EditBtn >
+                    ویرایش
+                    <PencilSquareIcon class="w-5 h-5" />
+                </EditBtn>
+
+                <DeleteBtn @click="sendDataToParent(data.id)" >
+                    <TrashIcon class="size-5 " />
+                    حذف
+                </DeleteBtn>
+
             </template>
+            
         </Table>
     </div>
 </template>
@@ -17,11 +26,13 @@
 //components
 import Table from "@/components/Table.vue";
 import Header from "@/components/Header.vue";
+import DeleteBtn from "@/components/Buttons/DeleteBtn.vue";
+import EditBtn from "@/components/Buttons/EditBtn.vue";
 
 
 //packages
 import axios from "axios";
-import { TrashIcon,} from "@heroicons/vue/16/solid";
+import { CheckBadgeIcon, HandThumbDownIcon, TrashIcon, PencilSquareIcon, UserIcon } from '@heroicons/vue/24/solid'
 
 import { ref, onBeforeMount, reactive } from "vue";
 

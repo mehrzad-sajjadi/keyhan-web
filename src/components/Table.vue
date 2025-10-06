@@ -21,16 +21,14 @@
                 >
                     <td v-for="(text, index) in data"
                         :key="index"
-                        class="px-4 py-3 border-t border-[#00b477]/10 text-gray-700 text-md"
+                        class="table-data text-md"
                     >
                         {{ text }}
                     </td>
                     <td
-                        class="px-4 py-3 border-t border-[#00b477]/10 text-gray-700 text-md"
+                        class="table-data text-md flex justify-center gap-2"
                     >
-                        <DeleteBtn @click="sendDataToParent(data.id)" >
-                            <slot name="deleteBtn"></slot>
-                        </DeleteBtn>
+                        <slot name="operationBtn"></slot>
                     </td>
                 </tr>
             </tbody>
@@ -39,10 +37,6 @@
 </template>
 
 <script setup>
-//components
-import DeleteBtn from '@/components/Buttons/DeleteBtn.vue';
-
-
 const emit = defineEmits(["dataId"]);
 
 function sendDataToParent(idParam){
