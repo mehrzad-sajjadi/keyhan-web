@@ -1,19 +1,22 @@
 import {createRouter ,createWebHistory} from "vue-router";
-import AddTaskView from "@/views/AddTaskView.vue";
-import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
-import AddSprintView from "@/views/AddSprintView.vue";
-import EditSprintView from "@/views/EditSprintView.vue";
-import EditTaskView from "@/views/EditTaskView.vue";
-import AddUserView from "@/views/AddUserView.vue";
-import UserView from "@/views/UserView.vue";
-import SprintView from "@/views/SprintView.vue";
-import EditUserView from "@/views/EditUserView.vue";
+//Task Pages
+import AddTaskView from "@/views/Task/AddTaskView.vue";
+import TaskView from "@/views/Task/TaskView.vue";
+import EditTaskView from "@/views/Task/EditTaskView.vue";
+//Sprint Pages
+import SprintView from "@/views/Sprint/SprintView.vue";
+import AddSprintView from "@/views/Sprint/AddSprintView.vue";
+import EditSprintView from "@/views/Sprint/EditSprintView.vue";
+//User Pages
+import AddUserView from "@/views/User/AddUserView.vue";
+import EditUserView from "@/views/User/EditUserView.vue";
+import UserView from "@/views/User/UserView.vue";
 
 const routes=[
     {
         path:"/",
-        component : HomeView
+        component : TaskView
     },
     {
         path:"/login",
