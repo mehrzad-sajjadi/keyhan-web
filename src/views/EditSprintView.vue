@@ -1,11 +1,11 @@
 <template>
     <Header />
     <div class="min-h-screen px-4 sm:px-6 lg:px-8">
-        <form @submit.prevent="AddSprint()" class="w-5/6 mx-auto my-16 border border-gray-500 rounded-lg">
+        <form @submit.prevent="editSprint()" class="w-5/6 mx-auto my-16 border border-gray-500 rounded-lg">
             <div class="flex flex-col justify-between">
                     <div class="mb-5 px-6 py-4">
-                        <h2 class=" font-semibold text-xl text-gray-800 mb-6">
-                            افزودن اسپرینت جدید
+                        <h2 class="font-semibold text-xl text-gray-800 mb-6">
+                            ویرایش اسپرینت
                         </h2>
                         <div class="space-y-5">
                             <div>
@@ -13,7 +13,7 @@
                                     نام اسپرینت
                                 </label>
                                 <input
-                                    v-model="name"
+                                    v-model="form.name"
                                     type="text"
                                     required
                                     autofocus
@@ -26,7 +26,7 @@
                                         تاریخ شروع
                                     </label>
                                     <DatePicker
-                                        v-model="start_date"
+                                        v-model="form.start_date"
                                         :min="currentDate"
                                         required
                                         color="#00a66c"
@@ -38,7 +38,7 @@
                                         تاریخ اتمام
                                     </label>
                                     <DatePicker
-                                        v-model="end_date"
+                                        v-model="form.end_date"
                                         :min="currentDate"
                                         required
                                         color="#00a66c"
@@ -52,7 +52,7 @@
                         <SubmitBtn
                             type="submit"
                         >
-                            افزودن
+                            ویرایش
                         </SubmitBtn>
                         <CancelBtn to="/sprints">
                             انصراف
@@ -67,42 +67,59 @@
 //package
 import axios from "axios";
 import DatePicker from "vue3-persian-datetime-picker";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 //Components
 import Header from "@/components/Header.vue";
 import SubmitBtn from '@/components/Buttons/SubmitBtn.vue'
 import CancelBtn from '@/components/Buttons/CancelBtn.vue'
 
-
-import { ref } from "vue";
-
-let idValue = Math.floor(Math.random() * 1000);
-
-const id = ref(idValue);
-const name = ref("");
-const start_date = ref("");
-const end_date = ref("");
-
+import { ref, reactive, onBeforeMount } from "vue";
 
 const router = useRouter();
+const route = useRoute();
+
+const form = reactive({
+    id: route.params.id,
+    name: "",
+    start_date: "",
+    end_date: ""
+});
 
 //دریافت تاریخ کنونی به فارسی
 let date = Date.now();
 let dateFormat = new Intl.DateTimeFormat("fa-IR-u-nu-latn").format(date);
 const currentDate = ref(dateFormat);
 
-function AddSprint() {
-    axios.post("http://localhost:3000/sprints",{
-        id:id.value,
-        name : name.value,
-        start_date: start_date.value,
-        end_date: end_date.value
-    }).catch((error)=>{
-        throw new Error(error)
-    })
+// ویرایش اسپرینت
+async function editSprint() {
+    try {
+        await axios.put(`http://localhost:3000/sprints/${form.id}`, {
+            id: form.id,
+            name: form.name,
+            start_date: form.start_date,
+            end_date: form.end_date
+        });
+    } catch (error) {
+        throw new Error(error);
+    }
+    router.push("/sprints");
 }
 
+// دریافت اطلاعات اسپرینت
+async function getSprint() {
+    try {
+        let response = await axios.get(`http://localhost:3000/sprints/${form.id}`);
+        const sprint = response.data;
+        form.name = sprint.name;
+        form.start_date = sprint.start_date;
+        form.end_date = sprint.end_date;
+    } catch (error) {
+        console.error("خطا در دریافت اسپرینت:", error);
+    }
+}
 
-
+onBeforeMount(() => {
+    getSprint();
+});
 </script>

@@ -19,16 +19,14 @@
                     :key="index"
                     class="hover:bg-[#00b477]/10 transition-colors duration-200"
                 >
-                    <td v-for="(text, index) in data"
-                        :key="index"
+                    <td v-for="(key, keyIndex) in keys"
+                        :key="keyIndex"
                         class="table-data text-md"
                     >
-                        {{ text }}
+                        {{ data[key] }}
                     </td>
-                    <td
-                        class="table-data text-md flex justify-center gap-2"
-                    >
-                        <slot name="operationBtn"></slot>
+                    <td class="table-data text-md flex justify-center gap-2">
+                        <slot name="operationBtn" :data="data"></slot>
                     </td>
                 </tr>
             </tbody>
@@ -37,14 +35,18 @@
 </template>
 
 <script setup>
-const emit = defineEmits(["dataId"]);
-
-function sendDataToParent(idParam){
-    emit("dataId",idParam);
-}
-const props = defineProps({
-    header: Object,
-    datas: Object
+defineProps({
+    header: {
+        type: Array,
+        required: true
+    },
+    keys: {
+        type: Array,
+        required: true
+    },
+    datas: {
+        type: Array,
+        required: true
+    }
 });
-
 </script>

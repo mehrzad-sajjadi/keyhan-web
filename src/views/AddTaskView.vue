@@ -19,9 +19,11 @@
                                     v-model="form.title"
                                     type="text"
                                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-[#00bc7d] focus:border-[#00bc7d]"
-                                    required
                                     autofocus
                                 />
+                                <p v-if="isSubmitted && !form.title" class="error-box">
+                                    عنوان تسک الزامی است
+                                </p>
                             </div>
                             <div class="flex flex-wrap gap-3">
                                 <!-- sprint -->
@@ -38,6 +40,9 @@
                                             {{ sprint.name }}
                                         </option>
                                     </select>
+                                    <p v-if="isSubmitted && !form.sprintName" class="error-box">
+                                        نوع اسپرینت الزامی است
+                                    </p>
                                 </div>
                                 <!-- sprints -->
                                 <div class="flex-1">
@@ -53,6 +58,9 @@
                                             {{ member.name }}
                                         </option>
                                     </select>
+                                    <p v-if="isSubmitted && !form.userId" class="error-box">
+                                        انتخاب کاربر الزامی است
+                                    </p>
                                 </div>
                                 <!-- tags -->
                                 <div class="flex-1">
@@ -139,6 +147,7 @@ const router = useRouter();
 
 const teamMembers = ref([]);
 const sprints = ref([]);
+const isSubmitted = ref(false);
 
 const form = reactive({
     id: Math.floor(Math.random() * 1000), 
@@ -154,6 +163,12 @@ const newTag = ref("");
 
 // اضافه کردن تسک
 async function AddTask() {
+    isSubmitted.value = true;
+    
+    if (!form.title || !form.sprintName || !form.userId) {
+        return;
+    }
+    
     try {
         await axios.post("http://localhost:3000/tasks", {
             id: form.id,

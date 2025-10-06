@@ -9,11 +9,11 @@
     <div class="w-full flex justify-center py-10">
         <Table
             :header="headerTable"
+            :keys="keysTable"
             :datas="users"
-            @dataId="removeUser"
         >
-            <template #operationBtn>
-                <EditBtn >
+            <template #operationBtn="{ data }">
+                <EditBtn :to="`/edit_user/${data.id}`">
                     ویرایش
                     <PencilSquareIcon class="w-5 h-5" />
                 </EditBtn>
@@ -22,16 +22,15 @@
                     <UserMinusIcon class="size-5 " />
                     حذف کاربر   
                 </DeleteBtn>
-
             </template>
         </Table>
-    </div>
+        </div>
     <teleport to="body">
         <Modal
             v-if="target"
             @closeModal="
                 () => {
-                    target = !target;
+                    target = false;
                 }
             "
         >
@@ -114,6 +113,7 @@
         </Modal>
     </teleport>
 </template>
+
 <script setup>
 //components
 import Header from "@/components/Header.vue" ;
@@ -123,19 +123,20 @@ import DeleteBtn from "@/components/Buttons/DeleteBtn.vue";
 import EditBtn from "@/components/Buttons/EditBtn.vue";
 
 //package
-import { UserPlusIcon, UserMinusIcon,PencilSquareIcon } from "@heroicons/vue/16/solid";
+import { UserPlusIcon, UserMinusIcon, PencilSquareIcon } from "@heroicons/vue/24/solid";
 import axios from "axios";
 
-import {ref, onBeforeMount, reactive} from "vue" ;
+import { ref, onBeforeMount } from "vue" ;
 
 const users = ref([]);
-const headerTable = reactive(["ID","نام کاربر","سن","کشور","شغل"])
+const headerTable = ["ID", "نام کاربر", "سن", "کشور", "شغل"];
+const keysTable = ["id", "name", "age", "country", "job"];
 const target = ref(false);
 let idValue = Math.floor(Math.random() * 1000);
 const id = ref(idValue);
 
 const newUser = ref({
-    id:id.value,
+    id: id.value,
     name: "",
     age: "",
     country: "",
@@ -153,26 +154,29 @@ async function removeUser(id) {
         }
     }
 }
-async function addUser(){
+
+async function addUser() {
     console.log(JSON.stringify(newUser.value));
     try {
-        await axios.post("http://localhost:3000/users",newUser.value)
-        target.value = false ;
+        await axios.post("http://localhost:3000/users", newUser.value);
+        target.value = false;
+        await getUsers();  // لیست کاربران را پس از افزودن بروزرسانی کنید
     } catch (error) {
         throw new Error("Error");
     }
 }
 
-async function getUsers(){
-    try{
+async function getUsers() {
+    try {
         let response = await axios.get("http://localhost:3000/users");
-        users.value = await  response.data ;
+        users.value = response.data;
         console.log(users.value);
-    }catch(error){
-        throw new Error(error)
+    } catch (error) {
+        throw new Error(error);
     }
 }
-onBeforeMount(()=>{
+
+onBeforeMount(() => {
     getUsers();
-})
+});
 </script>

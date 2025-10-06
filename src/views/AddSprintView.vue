@@ -13,12 +13,15 @@
                                     نام اسپرینت
                                 </label>
                                 <input
-                                    v-model="name"
+                                    v-model="form.name"
                                     type="text"
-                                    required
                                     autofocus
                                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-[#00bc7d] focus:border-[#00bc7d]"
                                 />
+                                <p v-if="isSubmitted && !form.name" class="error-box">
+                                    نام اسپرینت الزامی است
+                                </p>
+
                             </div>
                             <div class="flex flex-wrap gap-4">
                                 <div class="flex-1">
@@ -26,24 +29,32 @@
                                         تاریخ شروع
                                     </label>
                                     <DatePicker
-                                        v-model="start_date"
+                                        v-model="form.start_date"
                                         :min="currentDate"
                                         required
                                         color="#00a66c"
                                         class="block w-full p-4 border border-gray-300 rounded-lg bg-gray-50"
                                     />
+                                    <p v-if="isSubmitted && !form.start_date" class="error-box">
+                                        تاریخ شروع الزامی است
+                                    </p>
+
                                 </div>
                                 <div class="flex-1">
                                     <label class="block mb-2 text-lg font-medium text-gray-900">
                                         تاریخ اتمام
                                     </label>
                                     <DatePicker
-                                        v-model="end_date"
+                                        v-model="form.end_date"
                                         :min="currentDate"
                                         required
                                         color="#00a66c"
                                         class="block w-full p-4 border border-gray-300 rounded-lg bg-gray-50"
                                     />
+                                    <p v-if="isSubmitted && !form.end_date" class="error-box">
+                                        تاریخ پایان است
+                                    </p>
+
                                 </div>
                             </div>
                         </div>
@@ -74,33 +85,48 @@ import Header from "@/components/Header.vue";
 import SubmitBtn from '@/components/Buttons/SubmitBtn.vue'
 import CancelBtn from '@/components/Buttons/CancelBtn.vue'
 
-
-import { ref } from "vue";
-
-let idValue = Math.floor(Math.random() * 1000);
-
-const id = ref(idValue);
-const name = ref("");
-const start_date = ref("");
-const end_date = ref("");
-
+import { ref, reactive } from "vue";
 
 const router = useRouter();
+
+const form = reactive({
+    id: Math.floor(Math.random() * 1000),
+    name: "",
+    start_date: "",
+    end_date: ""
+});
 
 //دریافت تاریخ کنونی به فارسی
 let date = Date.now();
 let dateFormat = new Intl.DateTimeFormat("fa-IR-u-nu-latn").format(date);
 const currentDate = ref(dateFormat);
 
-function AddSprint() {
-    axios.post("http://localhost:3000/sprints",{
-        id:id.value,
-        name : name.value,
-        start_date: start_date.value,
-        end_date: end_date.value
-    }).catch((error)=>{
-        throw new Error(error)
-    })
+const isSubmitted = ref(false);
+// اضافه کردن اسپرینت
+async function AddSprint() {
+    isSubmitted.value= true;
+    if(!form.name || !form.start_date || !form.end_date ){
+        return ;
+    }
+    try {
+        await axios.post("http://localhost:3000/sprints", {
+            id: form.id,
+            name: form.name,
+            start_date: form.start_date,
+            end_date: form.end_date
+        });
+        resetForm();
+    } catch (error) {
+        throw new Error(error);
+    }
+    router.push("/sprints");
 }
 
+// تابع برای ریست کردن فرم
+function resetForm() {
+    form.id = Math.floor(Math.random() * 1000);
+    form.name = "";
+    form.start_date = "";
+    form.end_date = "";
+}
 </script>

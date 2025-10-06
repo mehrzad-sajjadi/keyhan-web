@@ -3,7 +3,7 @@ import AddTaskView from "@/views/AddTaskView.vue";
 import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
 import AddSprintView from "@/views/AddSprintView.vue";
-import EditSprintView from "@/views/EditTaskView.vue";
+import EditSprintView from "@/views/EditSprintView.vue";
 import EditTaskView from "@/views/EditTaskView.vue";
 
 import UserView from "@/views/UserView.vue";
