@@ -16,13 +16,12 @@
       "id": 427,
       "title": "جمع‌آوری نیازمندی‌های مشتری",
       "sprint_name": "Sprint",
-      "user_name": "زهرا محمدنژاد",
+      "user_name": "رضا محمدی",
       "tags": [
         "تحلیل",
         "مشتری"
       ],
-      "is_done": false,
-      "points": 2
+      "is_done": true
     },
     {
       "id": 428,
@@ -76,6 +75,17 @@
       "tags": [],
       "is_done": false,
       "points": 20
+    },
+    {
+      "id": 102,
+      "title": "بررسی reactive",
+      "sprint_name": "فرانت اند",
+      "user_name": "سهراب",
+      "tags": [
+        "vue"
+      ],
+      "is_done": false,
+      "points": 10
     }
   ],
   "users": [

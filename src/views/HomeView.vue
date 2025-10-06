@@ -16,6 +16,8 @@ async function getTasks(){
     try {
         let response = await axios.get("http://localhost:3000/tasks");
         tasksItem.value = response.data;
+        //جهت چینش از اخر به اول
+        tasksItem.value = [...response.data].reverse();
     } catch (error) {
         console.error("خطا در دریافت تسک‌ها:", error);
     }

@@ -12,9 +12,17 @@
             :datas="users"
             @dataId="removeUser"
         >
-            <template #deleteBtn>
-                <UserMinusIcon class="size-5 " />
-               حذف کاربر   
+            <template #operationBtn>
+                <EditBtn >
+                    ویرایش
+                    <PencilSquareIcon class="w-5 h-5" />
+                </EditBtn>
+
+                <DeleteBtn @click="removeUser(data.id)" >
+                    <UserMinusIcon class="size-5 " />
+                    حذف کاربر   
+                </DeleteBtn>
+
             </template>
         </Table>
     </div>
@@ -111,8 +119,11 @@
 import Header from "@/components/Header.vue" ;
 import Table from "@/components/Table.vue" ;
 import Modal from "@/components/Modal.vue";
+import DeleteBtn from "@/components/Buttons/DeleteBtn.vue";
+import EditBtn from "@/components/Buttons/EditBtn.vue";
+
 //package
-import { UserPlusIcon, UserMinusIcon } from "@heroicons/vue/16/solid";
+import { UserPlusIcon, UserMinusIcon,PencilSquareIcon } from "@heroicons/vue/16/solid";
 import axios from "axios";
 
 import {ref, onBeforeMount, reactive} from "vue" ;

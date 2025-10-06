@@ -7,7 +7,7 @@
             @dataId="removeSprint"
         >
             <template #operationBtn>
-                <EditBtn >
+                <EditBtn :to="`/edit_task/${data}`">
                     ویرایش
                     <PencilSquareIcon class="w-5 h-5" />
                 </EditBtn>

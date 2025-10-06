@@ -1,9 +1,11 @@
 import {createRouter ,createWebHistory} from "vue-router";
 import AddTaskView from "@/views/AddTaskView.vue";
 import HomeView from "@/views/HomeView.vue";
-import LoginView from "@/views/LoginView.vue";EditTaskView
+import LoginView from "@/views/LoginView.vue";
 import AddSprintView from "@/views/AddSprintView.vue";
+import EditSprintView from "@/views/EditTaskView.vue";
 import EditTaskView from "@/views/EditTaskView.vue";
+
 import UserView from "@/views/UserView.vue";
 import SprintView from "@/views/SprintView.vue";
 
@@ -23,6 +25,10 @@ const routes=[
     {
         path:"/edit_task/:id",
         component : EditTaskView
+    },
+    {
+        path:"/edit_sprint/:id",
+        component : EditSprintView
     },
     {
         path:"/add_sprint",

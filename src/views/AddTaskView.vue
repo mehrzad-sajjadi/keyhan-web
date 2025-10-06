@@ -16,7 +16,7 @@
                                     عنوان تسک
                                 </label>
                                 <input
-                                    v-model="title"
+                                    v-model="form.title"
                                     type="text"
                                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-[#00bc7d] focus:border-[#00bc7d]"
                                     required
@@ -30,7 +30,7 @@
                                         نوع اسپرینت
                                     </label>
                                     <select
-                                        v-model="sprintName"
+                                        v-model="form.sprintName"
                                         class="block w-full p-4 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-[#00bc7d] focus:border-[#00bc7d]"
                                     >
                                         <option value="" disabled>انتخاب اسپرینت</option>
@@ -45,7 +45,7 @@
                                         تخصیص به کاربر
                                     </label>
                                     <select
-                                        v-model="userId"
+                                        v-model="form.userId"
                                         class="block w-full p-4 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-[#00bc7d] focus:border-[#00bc7d]"
                                     >
                                         <option value="" disabled>انتخاب کاربر</option>
@@ -68,7 +68,7 @@
                                         />
                                         <button
                                             type="button"
-                                            class="bg-[#00bc7d] cursor-pointer text-white px-5 rounded-lg hover:bg-[#00a66c] transition duration-150"
+                                            class="bg-[#00bc7d] cursor-pointer text-white px-5 rounded-lg hover:bg-[#00a66c] "
                                             @click="addTag"
                                         >
                                             +
@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="flex flex-wrap gap-2 mt-3">
                                         <span
-                                            v-for="(tag, index) in tags"
+                                            v-for="(tag, index) in form.tags"
                                             :key="index"
                                             class="bg-[#00bc7d]/10 text-[#00bc7d] px-3 py-1 rounded-full text-sm flex items-center gap-1"
                                         >
@@ -97,7 +97,7 @@
                                         امتیاز تسک 
                                     </label>
                                     <input
-                                        v-model.number="points"
+                                        v-model.number="form.points"
                                         type="number"
                                         min="0"
                                         class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-[#00bc7d] focus:border-[#00bc7d]"
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <!-- دکمه -->
-                    <div class="flex flex-row justify-between mb-4 px-6">
+                    <div class="flex flex-row justify-start gap-5 mb-4 px-6">
                         <SubmitBtn>
                             افزودن تسک
                         </SubmitBtn>
@@ -129,7 +129,6 @@ import Header from "@/components/Header.vue";
 import SubmitBtn from '@/components/Buttons/SubmitBtn.vue';
 import CancelBtn from '@/components/Buttons/CancelBtn.vue';
 
-
 //packages
 import axios from "axios";
 import { useRouter } from "vue-router";
@@ -141,39 +140,38 @@ const router = useRouter();
 const teamMembers = ref([]);
 const sprints = ref([]);
 
-const idValue = Math.floor(Math.random() * 1000);
+const form = reactive({
+    id: Math.floor(Math.random() * 1000), 
+    title: "",
+    userId: "",
+    sprintName: "",
+    isDone: false,
+    tags: [],
+    points: 0
+});
 
-const id = ref(idValue);
-const title = ref("");
-const userId = ref(); 
-const sprintName = ref();
-const isDone = ref(false);
-const tags = reactive([]);
 const newTag = ref("");
-const points = ref(0);
-
 
 // اضافه کردن تسک
 async function AddTask() {
     try {
-        await axios.post("http://localhost:3000/tasks",{
-            id: id.value ,
-            title : title.value,
-            sprint_name: sprintName.value,
-            user_name : userId.value,
-            tags : tags,
-            is_done:isDone.value,
-            points: points.value
-        })
-        
+        await axios.post("http://localhost:3000/tasks", {
+            id: form.id,
+            title: form.title,
+            sprint_name: form.sprintName,
+            user_name: form.userId,
+            tags: form.tags,
+            is_done: form.isDone,
+            points: form.points
+        });
+        router.push("/");
     } catch (error) {
         throw new Error(error);
     }
     router.push("/");
 }
 
-
-//دریافت لیست افراد تیم
+// دریافت لیست افراد تیم
 async function getUsers() {
     try {
         let response = await axios.get("http://localhost:3000/users");
@@ -192,21 +190,22 @@ async function getSprints() {
         throw Error(error)
     }
 }
-onBeforeMount(()=>{
-    getUsers(),
-    getSprints()
-})
 
+onBeforeMount(() => {
+    getUsers();
+    getSprints();
+});
 
 // اضافه کردن تگ به تسک
 function addTag() {
     if (newTag.value.trim() !== "") {
-        tags.push(newTag.value.trim());
+        form.tags.push(newTag.value.trim());
         newTag.value = "";
     }
 }
 
 function removeTag(index) {
-    tags.splice(index, 1);
+    form.tags.splice(index, 1);
 }
+
 </script>

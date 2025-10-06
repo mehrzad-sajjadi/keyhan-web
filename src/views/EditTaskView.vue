@@ -16,7 +16,7 @@
                                     عنوان تسک
                                 </label>
                                 <input
-                                    v-model="title"
+                                    v-model="form.title"
                                     type="text"
                                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-[#00bc7d] focus:border-[#00bc7d]"
                                     required
@@ -30,7 +30,7 @@
                                         نوع اسپرینت
                                     </label>
                                     <select
-                                        v-model="sprintName"
+                                        v-model="form.sprintName"
                                         class="block w-full p-4 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-[#00bc7d] focus:border-[#00bc7d]"
                                     >
                                         <option value="" disabled>انتخاب اسپرینت</option>
@@ -45,7 +45,7 @@
                                         تخصیص به کاربر
                                     </label>
                                     <select
-                                        v-model="userId"
+                                        v-model="form.userId"
                                         class="block w-full p-4 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-[#00bc7d] focus:border-[#00bc7d]"
                                     >
                                         <option value="" disabled>انتخاب کاربر</option>
@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="flex flex-wrap gap-2 mt-3">
                                         <span
-                                            v-for="(tag, index) in tags"
+                                            v-for="(tag, index) in form.tags"
                                             :key="index"
                                             class="bg-[#00bc7d]/10 text-[#00bc7d] px-3 py-1 rounded-full text-sm flex items-center gap-1"
                                         >
@@ -91,14 +91,26 @@
                                         </span>
                                     </div>
                                 </div>
-
+                                <!-- points -->
+                                <div class="flex-1">
+                                    <label class="block mb-2 text-lg font-medium text-gray-900">
+                                        امتیاز تسک 
+                                    </label>
+                                    <input
+                                        v-model.number="form.points"
+                                        type="number"
+                                        min="0"
+                                        class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-[#00bc7d] focus:border-[#00bc7d]"
+                                        placeholder="0"
+                                    />
+                                </div>
                             </div>
                             <!-- is_done -->
                             <div>
                                 <label class="flex items-center mb-2 text-lg font-medium text-gray-900">
                                     <input
                                         type="checkbox"
-                                        v-model="isDone"
+                                        v-model="form.isDone"
                                         class="mr-2 h-5 w-5 text-[#00bc7d] focus:ring-[#00bc7d] border-gray-300 rounded"
                                     />
                                     تسک انجام شده است
@@ -107,13 +119,9 @@
                         </div>
                     </div>
                     <!-- دکمه -->
-                    <div class="flex flex-row justify-between mb-4 px-6">
-                        <SubmitBtn>
-                            ویرایش تسک
-                        </SubmitBtn>
-                        <CancelBtn to="/">
-                            انصراف
-                        </CancelBtn>
+                    <div class="flex flex-row justify-start gap-5 mb-4 px-6">
+                        <SubmitBtn>ویرایش تسک</SubmitBtn>
+                        <CancelBtn to="/">انصراف</CancelBtn>
                     </div>
                 </div>
             </div>
@@ -124,8 +132,8 @@
 <script setup>
 //components
 import Header from "@/components/Header.vue";
-import SubmitBtn from '@/components/Buttons/SubmitBtn.vue'
-import CancelBtn from '@/components/Buttons/CancelBtn.vue'
+import SubmitBtn from '@/components/Buttons/SubmitBtn.vue';
+import CancelBtn from '@/components/Buttons/CancelBtn.vue';
 
 //packages
 import axios from "axios";
@@ -139,33 +147,35 @@ const route = useRoute();
 const teamMembers = ref([]);
 const sprints = ref([]);
 
-const taskId = ref(route.params.id);
+const form = reactive({
+    id: route.params.id,
+    title: "",
+    userId: "",
+    sprintName: "",
+    isDone: false,
+    tags: [],
+    points: 0
+});
 
-const title = ref("");
-const userId = ref(""); 
-const sprintName = ref("");
-const isDone = ref(false);
-const tags = reactive([]);
 const newTag = ref("");
-
 
 // ویرایش تسک
 async function editTask() {
     try {
-        await axios.put(`http://localhost:3000/tasks/${taskId.value}`,{
-            id: taskId.value,
-            title: title.value,
-            sprint_name: sprintName.value,
-            user_name: userId.value,
-            tags: tags,
-            is_done: isDone.value
+        await axios.put(`http://localhost:3000/tasks/${form.id}`, {
+            id: form.id,
+            title: form.title,
+            sprint_name: form.sprintName,
+            user_name: form.userId,
+            tags: form.tags,
+            is_done: form.isDone,
+            points: form.points
         });
     } catch (error) {
         throw new Error(error);
     }
     router.push("/");
 }
-
 
 //دریافت لیست افراد تیم
 async function getUsers() {
@@ -190,34 +200,34 @@ async function getSprints() {
 // دریافت اطلاعات تسک
 async function getTask() {
     try {
-        let response = await axios.get(`http://localhost:3000/tasks/${taskId.value}`);
+        let response = await axios.get(`http://localhost:3000/tasks/${form.id}`);
         const task = response.data;
-        title.value = task.title;
-        sprintName.value = task.sprint_name;
-        userId.value = task.user_name;
-        isDone.value = task.is_done;
-        tags.splice(0, tags.length, ...task.tags);
+        form.title = task.title;
+        form.sprintName = task.sprint_name;
+        form.userId = task.user_name;
+        form.isDone = task.is_done;
+        form.tags.splice(0, form.tags.length, ...task.tags);
+        form.points = task.points ; 
     } catch (error) {
-        console.error("خطا در دریافت تسک:", error);
+        throw new Error(error);
     }
 }
 
-onBeforeMount(()=>{
+onBeforeMount(() => {
     getUsers();
     getSprints();
     getTask();
-})
-
+});
 
 // اضافه کردن تگ به تسک
 function addTag() {
     if (newTag.value.trim() !== "") {
-        tags.push(newTag.value.trim());
+        form.tags.push(newTag.value.trim());
         newTag.value = "";
     }
 }
 
 function removeTag(index) {
-    tags.splice(index, 1);
+    form.tags.splice(index, 1);
 }
 </script>
