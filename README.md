@@ -80,6 +80,7 @@ task-management-app/
 - `vue-router`: ^4.0.0 (اگر استفاده شده باشد)
 - `axios`: ^0.21.0 (برای استفاده از API)
 - پکیجهای توسعه: `json-server`: ^0.17.0, `@vue/cli-service`: ^5.0.0
+- `Flash Messenger `
 
 برای لیست کامل، `package.json` را بررسی کنید.
 
