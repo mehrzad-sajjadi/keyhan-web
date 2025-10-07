@@ -1,17 +1,17 @@
 <template>
-    <div class="min-h-screen flex items-center justify-center bg-gray-50">
+    <div class="min-h-screen flex items-center justify-center bg-[var(--color-neutral-50)]">
         <form
             @submit.prevent="register(userName,password)"
-            class="flex flex-col  bg-white text-gray-800 w-full max-w-[540px] p-10 border border-[#10b981] rounded-lg shadow-lg"
+            class="flex flex-col bg-white text-[var(--color-neutral-800)] w-full max-w-[540px] p-10 border border-[var(--color-primary)] rounded-lg shadow-lg"
         >
-            <h1 class="text-xl font-bold mb-6 text-[#00b477]">ورود به حساب کاربری کیهان وب</h1>
-            <hr class="border-gray-200 mb-6">
+            <h1 class="text-xl font-bold mb-6 text-[var(--color-accent)]">ورود به حساب کاربری کیهان وب</h1>
+            <hr class="border-[var(--color-neutral-200)] mb-6">
             <label class="text-md font-medium mb-2">نام کاربری</label>
             <input 
                 v-model="userName"
                 type="text" 
                 placeholder="نام کاربری خود را وارد کنید" 
-                class="bg-white text-sm border border-gray-300 rounded-md p-3 mb-4 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00b477] focus:border-transparent"
+                class="bg-white text-sm border border-[var(--color-neutral-300)] rounded-md p-3 mb-4 text-[var(--color-neutral-800)] placeholder-[var(--color-neutral-400)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] focus:border-transparent"
             >
             <label class="text-md font-medium mb-2">رمز عبور</label>
             <div class="relative">
@@ -19,11 +19,11 @@
                     v-model="password"
                     :type="showPassword ? 'text' : 'password'" 
                     placeholder="رمز عبور خود را وارد کنید"
-                    class="bg-white border border-gray-300 rounded-md p-3 w-full text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#10b981] focus:border-transparent"
+                    class="bg-white border border-[var(--color-neutral-300)] rounded-md p-3 w-full text-[var(--color-neutral-800)] placeholder-[var(--color-neutral-400)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent"
                 >
                 <button
                     type="button"
-                    class="absolute cursor-pointer left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#10b981]"
+                    class="absolute cursor-pointer left-3 top-1/2 -translate-y-1/2 text-[var(--color-neutral-400)] hover:text-[var(--color-primary)]"
                     @click="showPassword = !showPassword"
                 >
                     <div class="w-5">
@@ -35,7 +35,7 @@
             <button 
                 type="submit" 
                 :disabled="userName==='' || password===''"
-                class="bg-[#10b981] cursor-pointer hover:bg-[#009966] text-white font-semibold py-3 rounded-md transition-colors mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                class="bg-[var(--color-primary)] cursor-pointer hover:bg-[var(--color-primary-hover)] text-white font-semibold py-3 rounded-md transition-colors mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
             >
                 ورود به مدیریت تسک کیهان وب
             </button>

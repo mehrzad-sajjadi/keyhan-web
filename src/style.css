@@ -10,6 +10,21 @@
   direction: rtl;
 }
 
+@theme {
+  --color-primary: #10b981;        /* سبز اصلی (دکمه‌ها، border، focus) */
+  --color-primary-hover: #009966;  /* hover سبز */
+  --color-accent: #00b477;         /* سبز روشن (متن، border) */
+  --color-accent-dark: #008a5e;    /* سبز تیره (گرادیان) */
+  --color-neutral-50: #f9fafb;     /* bg روشن */
+  --color-neutral-200: #e5e7eb;    /* border hr */
+  --color-neutral-300: #d1d5db;    /* border input */
+  --color-neutral-400: #9ca3af;    /* placeholder */
+  --color-neutral-700: #374151;    /* text gray */
+  --color-neutral-800: #1f2937;    /* text dark */
+
+  --background-image-gradient-primary: linear-gradient(to right, var(--color-accent), var(--color-accent-dark));
+}
+
 @utility btn-base {
   @apply h-9 px-3 cursor-pointer inline-flex items-center gap-1 rounded-lg border text-sm transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
 }

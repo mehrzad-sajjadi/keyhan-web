@@ -1,7 +1,7 @@
 <template>
     <div class="w-[70%] p-4 rounded-lg text-md shadow-md text-white flex">
-        <table class="w-full text-center min-h-min rounded-lg overflow-hidden border border-[#00b477]/20">
-            <thead class="text-center bg-gradient-to-r from-[#00b477] to-[#008a5e]">
+        <table class="w-full text-center min-h-min rounded-lg overflow-hidden border border-accent/20">
+            <thead class="text-center bg-gradient-primary">
                 <tr>
                     <th v-for="(headerData, index) in header" 
                         :key="index"
@@ -17,7 +17,7 @@
             <tbody class="bg-white">
                 <tr v-for="(data, index) in datas" 
                     :key="index"
-                    class="hover:bg-[#00b477]/10 transition-colors duration-200"
+                    class="hover:bg-accent/10 transition-colors duration-200"
                 >
                     <td v-for="(key, keyIndex) in keys"
                         :key="keyIndex"

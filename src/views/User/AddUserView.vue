@@ -10,7 +10,6 @@
                             افزودن کاربر جدید
                         </h2>
                         <div class="space-y-5">
-                            <!-- row 1: name and age -->
                             <div class="flex flex-wrap gap-3">
                                 <div class="flex-1">
                                     <label class="block mb-2 text-lg font-medium text-gray-900">
@@ -42,7 +41,6 @@
                                     </p>
                                 </div>
                             </div>
-                            <!-- row 2: country and job -->
                             <div class="flex flex-wrap gap-3">
                                 <div class="flex-1">
                                     <label class="block mb-2 text-lg font-medium text-gray-900">
@@ -99,7 +97,7 @@ import CancelBtn from '@/components/Buttons/CancelBtn.vue';
 import axios from "axios";
 import { useRouter } from "vue-router";
 
-import { ref, reactive, onBeforeMount } from "vue";
+import { ref, reactive } from "vue";
 
 const router = useRouter();
 
