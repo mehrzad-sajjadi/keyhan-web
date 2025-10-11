@@ -61,5 +61,7 @@ function register(name, password) {
     localStorage.setItem("name", name);
     localStorage.setItem("password", password);
     router.push("/");
+    new Flash('با موفقیت وارد شدید', 'success');
+
 }
 </script>
