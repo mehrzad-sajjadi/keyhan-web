@@ -98,6 +98,7 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 
 import { ref, reactive } from "vue";
+import Flash from "js-flash";
 
 const router = useRouter();
 
@@ -128,6 +129,7 @@ async function AddUser(){
         });
         isSubmitted.value = false ;
         router.push("/users");
+        new Flash("کاربر جدید ایجاد شد","success")
     } catch (error) {
         throw new Error(error)
     }
